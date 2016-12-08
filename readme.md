@@ -25,7 +25,7 @@ const promises = [
 	getPromise()
 ];
 
-Promise.all(promises.map(reflect)).then(result => {
+Promise.all(promises.map(pReflect)).then(result => {
 	console.log(result);
 	/*
 	[{
