@@ -1,11 +1,11 @@
 import test from 'ava';
-import m from './';
+import pReflect from '.';
 
 const fixture = Symbol('fixture');
 
-test(async t => {
+test('main', async t => {
 	t.deepEqual(
-		await m(Promise.resolve(fixture)),
+		await pReflect(Promise.resolve(fixture)),
 		{
 			isFulfilled: true,
 			isRejected: false,
@@ -14,7 +14,7 @@ test(async t => {
 	);
 
 	t.deepEqual(
-		await m(Promise.reject(fixture)),
+		await pReflect(Promise.reject(fixture)),
 		{
 			isFulfilled: false,
 			isRejected: true,

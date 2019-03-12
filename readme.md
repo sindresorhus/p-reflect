@@ -70,6 +70,8 @@ The fulfilled value is an object with the following properties:
 
 Type: `Promise`
 
+A promise to reflect upon.
+
 
 ## Related
 

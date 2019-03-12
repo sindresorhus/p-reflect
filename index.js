@@ -1,14 +1,21 @@
 'use strict';
 
-module.exports = promise => Promise.resolve(promise).then(
-	value => ({
-		isFulfilled: true,
-		isRejected: false,
-		value
-	}),
-	reason => ({
-		isFulfilled: false,
-		isRejected: true,
-		reason
-	})
-);
+const pReflect = async promise => {
+	try {
+		const value = await promise;
+		return {
+			isFulfilled: true,
+			isRejected: false,
+			value
+		};
+	} catch (error) {
+		return {
+			isFulfilled: false,
+			isRejected: true,
+			reason: error
+		};
+	}
+};
+
+module.exports = pReflect;
+module.exports.default = pReflect;
