@@ -30,21 +30,23 @@ const pReflect = require('p-reflect');
 
 	console.log(results);
 	/*
-	[{
-		isFulfilled: true,
-		isRejected: false,
-		value: '🦄'
-	},
-	{
-		isFulfilled: false,
-		isRejected: true,
-		reason: [Error: 👹]
-	},
-	{
-		isFulfilled: true,
-		isRejected: false,
-		value: '🐴'
-	}]
+	[
+		{
+			isFulfilled: true,
+			isRejected: false,
+			value: '🦄'
+		},
+		{
+			isFulfilled: false,
+			isRejected: true,
+			reason: [Error: 👹]
+		},
+		{
+			isFulfilled: true,
+			isRejected: false,
+			value: '🐴'
+		}
+	]
 	*/
 
 	const resolvedString = results
@@ -62,17 +64,17 @@ The above is just an example. Use [`p-settle`](https://github.com/sindresorhus/p
 
 ## API
 
-### pReflect(input)
+### pReflect(promise)
 
-Returns a fulfilled `Promise`.
+Returns a `Promise<Object>`.
 
-The fulfilled value is an object with the following properties:
+The object has the following properties:
 
 - `isFulfilled`
 - `isRejected`
 - `value` or `reason` *(Depending on whether the promise fulfilled or rejected)*
 
-#### input
+#### promise
 
 Type: `Promise`
 
