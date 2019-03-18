@@ -18,7 +18,7 @@ export type PromiseResult<ValueType> =
  * Make a promise always fulfill with its actual fulfillment value or rejection reason.
  *
  * @param promise - A promise to reflect upon.
- * @returns A fulfilled value.
+ * @returns The fulfilled value.
  */
 export default function pReflect<ValueType>(
 	promise: PromiseLike<ValueType>
