@@ -8,7 +8,7 @@ Useful when you want a promise to fulfill no matter what and would rather handle
 ## Install
 
 ```
-$ npm install --save p-reflect
+$ npm install p-reflect
 ```
 
 
@@ -19,14 +19,16 @@ Here, `Promise.all` would normally fail early because one of the promises reject
 ```js
 const pReflect = require('p-reflect');
 
-const promises = [
-	getPromise(),
-	getPromiseThatRejects(),
-	getPromise()
-];
+(async () => {
+	const promises = [
+		getPromise(),
+		getPromiseThatRejects(),
+		getPromise()
+	];
 
-Promise.all(promises.map(pReflect)).then(result => {
-	console.log(result);
+	const results = await Promise.all(promises.map(pReflect));
+
+	console.log(results);
 	/*
 	[{
 		isFulfilled: true,
@@ -45,10 +47,14 @@ Promise.all(promises.map(pReflect)).then(result => {
 	}]
 	*/
 
-	const ret = f.filter(x => x.isFulfilled).map(x => x.value).join('');
-	console.log(ret);
+	const resolvedString = results
+		.filter(result => result.isFulfilled)
+		.map(result => result.value)
+		.join('');
+
+	console.log(resolvedString);
 	//=> '🦄🐴'
-});
+})();
 ```
 
 The above is just an example. Use [`p-settle`](https://github.com/sindresorhus/p-settle) if you need this.
@@ -69,6 +75,8 @@ The fulfilled value is an object with the following properties:
 #### input
 
 Type: `Promise`
+
+A promise to reflect upon.
 
 
 ## Related
