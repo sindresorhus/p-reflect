@@ -18,4 +18,5 @@ const pReflect = async promise => {
 };
 
 module.exports = pReflect;
+// TODO: Remove this for the next major release
 module.exports.default = pReflect;

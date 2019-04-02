@@ -1,71 +1,84 @@
-export interface PromiseFulfilledResult<ValueType> {
-	isFulfilled: true;
-	isRejected: false;
-	value: ValueType;
+declare namespace pReflect {
+	interface PromiseFulfilledResult<ValueType> {
+		isFulfilled: true;
+		isRejected: false;
+		value: ValueType;
+	}
+
+	interface PromiseRejectedResult {
+		isFulfilled: false;
+		isRejected: true;
+		reason: unknown;
+	}
+
+	type PromiseResult<ValueType> =
+		| PromiseFulfilledResult<ValueType>
+		| PromiseRejectedResult;
 }
 
-export interface PromiseRejectedResult {
-	isFulfilled: false;
-	isRejected: true;
-	reason: unknown;
-}
+declare const pReflect: {
+	/**
+	Make a promise always fulfill with its actual fulfillment value or rejection reason.
 
-export type PromiseResult<ValueType> =
-	| PromiseFulfilledResult<ValueType>
-	| PromiseRejectedResult;
+	@param promise - A promise to reflect upon.
+	@returns Promise reflection.
 
-/**
-Make a promise always fulfill with its actual fulfillment value or rejection reason.
+	@example
+	```
+	import pReflect = require('p-reflect');
 
-@param promise - A promise to reflect upon.
-@returns Promise reflection.
+	// Here, `Promise.all` would normally fail early because one of the promises rejects, but by using `p-reflect`, we can ignore the rejection and handle it later on.
 
-@example
-```
-import pReflect from 'p-reflect';
+	(async () => {
+		const promises = [
+			getPromise(),
+			getPromiseThatRejects(),
+			getPromise()
+		];
 
-// Here, `Promise.all` would normally fail early because one of the promises rejects, but by using `p-reflect`, we can ignore the rejection and handle it later on.
+		const results = await Promise.all(promises.map(pReflect));
 
-(async () => {
-	const promises = [
-		getPromise(),
-		getPromiseThatRejects(),
-		getPromise()
-	];
+		console.log(results);
+		/*
+		[
+			{
+				isFulfilled: true,
+				isRejected: false,
+				value: '🦄'
+			},
+			{
+				isFulfilled: false,
+				isRejected: true,
+				reason: [Error: 👹]
+			},
+			{
+				isFulfilled: true,
+				isRejected: false,
+				value: '🐴'
+			}
+		]
+		*\/
 
-	const results = await Promise.all(promises.map(pReflect));
+		const resolvedString = results
+			.filter(result => result.isFulfilled)
+			.map(result => result.value)
+			.join('');
 
-	console.log(results);
-	/*
-	[
-		{
-			isFulfilled: true,
-			isRejected: false,
-			value: '🦄'
-		},
-		{
-			isFulfilled: false,
-			isRejected: true,
-			reason: [Error: 👹]
-		},
-		{
-			isFulfilled: true,
-			isRejected: false,
-			value: '🐴'
-		}
-	]
-	*\/
+		console.log(resolvedString);
+		//=> '🦄🐴'
+	})();
+	```
+	*/
+	<ValueType>(promise: PromiseLike<ValueType>): Promise<
+		pReflect.PromiseResult<ValueType>
+	>;
 
-	const resolvedString = results
-		.filter(result => result.isFulfilled)
-		.map(result => result.value)
-		.join('');
+	// TODO: Remove this for the next major release, refactor the whole definition to:
+	// declare function pReflect<ValueType>(
+	// 	promise: PromiseLike<ValueType>
+	// ): Promise<pReflect.PromiseResult<ValueType>>;
+	// export = pReflect;
+	default: typeof pReflect;
+};
 
-	console.log(resolvedString);
-	//=> '🦄🐴'
-})();
-```
-*/
-export default function pReflect<ValueType>(
-	promise: PromiseLike<ValueType>
-): Promise<PromiseResult<ValueType>>;
+export = pReflect;
