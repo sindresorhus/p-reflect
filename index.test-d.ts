@@ -1,5 +1,5 @@
-import {expectType} from 'tsd-check';
-import pReflect from '.';
+import {expectType} from 'tsd';
+import pReflect = require('.');
 
 const result = await pReflect(Promise.resolve('foo'));
 
