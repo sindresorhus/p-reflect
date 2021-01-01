@@ -1,4 +1,4 @@
-# p-reflect [![Build Status](https://travis-ci.org/sindresorhus/p-reflect.svg?branch=master)](https://travis-ci.org/sindresorhus/p-reflect)
+# p-reflect
 
 > Make a promise always fulfill with its actual fulfillment value or rejection reason
 
