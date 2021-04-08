@@ -1,5 +1,5 @@
 import {expectType} from 'tsd';
-import pReflect = require('.');
+import pReflect from './index.js';
 
 const result = await pReflect(Promise.resolve('foo'));
 

@@ -1,8 +1,7 @@
-'use strict';
-
-const pReflect = async promise => {
+export default async function pReflect(promise) {
 	try {
 		const value = await promise;
+
 		return {
 			isFulfilled: true,
 			isRejected: false,
@@ -15,8 +14,4 @@ const pReflect = async promise => {
 			reason: error
 		};
 	}
-};
-
-module.exports = pReflect;
-// TODO: Remove this for the next major release
-module.exports.default = pReflect;
+}

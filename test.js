@@ -1,5 +1,5 @@
 import test from 'ava';
-import pReflect from '.';
+import pReflect from './index.js';
 
 const fixture = Symbol('fixture');
 
