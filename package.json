@@ -1,6 +1,6 @@
 {
 	"name": "p-reflect",
-	"version": "2.1.0",
+	"version": "3.0.0",
 	"description": "Make a promise always fulfill with its actual fulfillment value or rejection reason",
 	"license": "MIT",
 	"repository": "sindresorhus/p-reflect",
