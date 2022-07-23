@@ -72,3 +72,7 @@ console.log(resolvedString);
 export default function pReflect<ValueType>(promise: PromiseLike<ValueType>): Promise<
 PromiseResult<ValueType>
 >;
+
+export function isFulfilled<T>(promiseResult: PromiseResult<T>): promiseResult is PromiseFulfilledResult<T>;
+
+export function isRejected<T>(promiseResult: PromiseResult<T>): promiseResult is PromiseRejectedResult;

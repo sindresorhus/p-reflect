@@ -17,3 +17,11 @@ export default async function pReflect(promise) {
 		};
 	}
 }
+
+export function isFulfilled(promiseResult) {
+	return 'value' in promiseResult;
+}
+
+export function isRejected(promiseResult) {
+	return 'reason' in promiseResult;
+}

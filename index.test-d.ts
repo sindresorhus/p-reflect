@@ -1,9 +1,9 @@
 import {expectType} from 'tsd';
-import pReflect from './index.js';
+import pReflect, {isFulfilled} from './index.js';
 
 const result = await pReflect(Promise.resolve('foo'));
 
-if (result.isFulfilled) {
+if (isFulfilled(result)) {
 	expectType<'fulfilled'>(result.status);
 	expectType<true>(result.isFulfilled);
 	expectType<false>(result.isRejected);
