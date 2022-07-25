@@ -4,16 +4,16 @@ export default async function pReflect(promise) {
 
 		return {
 			status: 'fulfilled',
+			value,
 			isFulfilled: true,
-			isRejected: false,
-			value
+			isRejected: false
 		};
 	} catch (error) {
 		return {
 			status: 'rejected',
+			reason: error,
 			isFulfilled: false,
-			isRejected: true,
-			reason: error
+			isRejected: true
 		};
 	}
 }

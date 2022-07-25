@@ -30,21 +30,21 @@ console.log(results);
 [
 	{
 		status: 'fulfilled',
-		isFulfilled: true,
-		isRejected: false,
 		value: '🦄'
+		isFulfilled: true,
+		isRejected: false
 	},
 	{
 		status: 'rejected',
-		isFulfilled: false,
-		isRejected: true,
 		reason: [Error: 👹]
+		isFulfilled: false,
+		isRejected: true
 	},
 	{
 		status: 'fulfilled',
-		isFulfilled: true,
-		isRejected: false,
 		value: '🐴'
+		isFulfilled: true,
+		isRejected: false
 	}
 ]
 */
@@ -69,9 +69,9 @@ Returns a `Promise<Object>`.
 The object has the following properties:
 
 - `status` *('fulfilled' or 'rejected', Depending on whether the promise fulfilled or rejected)*
+- `value` or `reason` *(Depending on whether the promise fulfilled or rejected)*
 - `isFulfilled`
 - `isRejected`
-- `value` or `reason` *(Depending on whether the promise fulfilled or rejected)*
 
 #### promise
 

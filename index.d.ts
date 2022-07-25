@@ -1,15 +1,15 @@
 export interface PromiseFulfilledResult<ValueType> {
 	status: 'fulfilled';
+	value: ValueType;
 	isFulfilled: true;
 	isRejected: false;
-	value: ValueType;
 }
 
 export interface PromiseRejectedResult {
 	status: 'rejected';
+	reason: unknown;
 	isFulfilled: false;
 	isRejected: true;
-	reason: unknown;
 }
 
 export type PromiseResult<ValueType> =
@@ -41,21 +41,21 @@ console.log(results);
 [
 	{
 		status: 'fulfilled',
-		isFulfilled: true,
-		isRejected: false,
 		value: '🦄'
+		isFulfilled: true,
+		isRejected: false
 	},
 	{
 		status: 'rejected',
-		isFulfilled: false,
-		isRejected: true,
 		reason: [Error: 👹]
+		isFulfilled: false,
+		isRejected: true
 	},
 	{
 		status: 'fulfilled',
-		isFulfilled: true,
-		isRejected: false,
 		value: '🐴'
+		isFulfilled: true,
+		isRejected: false
 	}
 ]
 *\/
