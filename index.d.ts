@@ -1,13 +1,15 @@
 export interface PromiseFulfilledResult<ValueType> {
+	status: 'fulfilled';
+	value: ValueType;
 	isFulfilled: true;
 	isRejected: false;
-	value: ValueType;
 }
 
 export interface PromiseRejectedResult {
+	status: 'rejected';
+	reason: unknown;
 	isFulfilled: false;
 	isRejected: true;
-	reason: unknown;
 }
 
 export type PromiseResult<ValueType> =
@@ -38,19 +40,22 @@ console.log(results);
 /*
 [
 	{
-		isFulfilled: true,
-		isRejected: false,
+		status: 'fulfilled',
 		value: '🦄'
-	},
-	{
-		isFulfilled: false,
-		isRejected: true,
-		reason: [Error: 👹]
-	},
-	{
 		isFulfilled: true,
-		isRejected: false,
+		isRejected: false
+	},
+	{
+		status: 'rejected',
+		reason: [Error: 👹]
+		isFulfilled: false,
+		isRejected: true
+	},
+	{
+		status: 'fulfilled',
 		value: '🐴'
+		isFulfilled: true,
+		isRejected: false
 	}
 ]
 *\/
@@ -67,3 +72,13 @@ console.log(resolvedString);
 export default function pReflect<ValueType>(promise: PromiseLike<ValueType>): Promise<
 PromiseResult<ValueType>
 >;
+
+/**
+Narrows a variable of type `PromiseResult` to type `PromiseFulfilledResult` if the variable has the property `value`, otherwise narrows it to the `PromiseRejectedResult` type.
+*/
+export function isFulfilled<T>(promiseResult: PromiseResult<T>): promiseResult is PromiseFulfilledResult<T>;
+
+/**
+Narrows a variable of type `PromiseResult` to type `PromiseRejectedResult` if the variable has the property `reason`, otherwise narrows it to the `PromiseFulfilledResult` type.
+*/
+export function isRejected<T>(promiseResult: PromiseResult<T>): promiseResult is PromiseRejectedResult;

@@ -29,19 +29,22 @@ console.log(results);
 /*
 [
 	{
-		isFulfilled: true,
-		isRejected: false,
+		status: 'fulfilled',
 		value: '🦄'
-	},
-	{
-		isFulfilled: false,
-		isRejected: true,
-		reason: [Error: 👹]
-	},
-	{
 		isFulfilled: true,
-		isRejected: false,
+		isRejected: false
+	},
+	{
+		status: 'rejected',
+		reason: [Error: 👹]
+		isFulfilled: false,
+		isRejected: true
+	},
+	{
+		status: 'fulfilled',
 		value: '🐴'
+		isFulfilled: true,
+		isRejected: false
 	}
 ]
 */
@@ -65,15 +68,35 @@ Returns a `Promise<Object>`.
 
 The object has the following properties:
 
+- `status` *(`'fulfilled'` or `'rejected'`, depending on how the promise resolved)*
+- `value` or `reason` *(Depending on whether the promise fulfilled or rejected)*
 - `isFulfilled`
 - `isRejected`
-- `value` or `reason` *(Depending on whether the promise fulfilled or rejected)*
 
 #### promise
 
 Type: `Promise`
 
 A promise to reflect upon.
+
+### isFulfilled(object)
+
+This is a type guard for TypeScript users.
+
+Returns `true` if the object has the property `value`, `false` otherwise.
+
+This is useful since `await pReflect(promise)` always returns a `PromiseResult`. This function can be used to determine whether `PromiseResult` is `PromiseFulfilledResult` or `PromiseRejectedResult`.
+
+This is a workaround for [microsoft/TypeScript#32399](https://github.com/microsoft/TypeScript/issues/32399)
+- reference documentation [Using type predicates](https://www.typescriptlang.org/docs/handbook/2/narrowing.html)
+
+### isRejected(object)
+
+This is a type guard for TypeScript users.
+
+Returns `true` if the object has the property `reason`, `false` otherwise.
+
+This is useful since `await pReflect(promise)` always returns a `PromiseResult`. This function can be used to determine whether `PromiseResult` is `PromiseRejectedResult` or `PromiseFulfilledResult`.
 
 ## Related
 

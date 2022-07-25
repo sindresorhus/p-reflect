@@ -3,15 +3,25 @@ export default async function pReflect(promise) {
 		const value = await promise;
 
 		return {
+			status: 'fulfilled',
+			value,
 			isFulfilled: true,
-			isRejected: false,
-			value
+			isRejected: false
 		};
 	} catch (error) {
 		return {
+			status: 'rejected',
+			reason: error,
 			isFulfilled: false,
-			isRejected: true,
-			reason: error
+			isRejected: true
 		};
 	}
+}
+
+export function isFulfilled(promiseResult) {
+	return 'value' in promiseResult;
+}
+
+export function isRejected(promiseResult) {
+	return 'reason' in promiseResult;
 }
