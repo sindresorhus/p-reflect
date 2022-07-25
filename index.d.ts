@@ -74,15 +74,11 @@ PromiseResult<ValueType>
 >;
 
 /**
-Narrows a variable of type PromiseResult to type PromiseFulfilledResult if the variable has the property 'value', otherwise narrows it to PromiseRejectedResult type.
-@param promiseResult - a variable of type PromiseResult
-@returns boolean
+Narrows a variable of type `PromiseResult` to type `PromiseFulfilledResult` if the variable has the property `value`, otherwise narrows it to the `PromiseRejectedResult` type.
 */
 export function isFulfilled<T>(promiseResult: PromiseResult<T>): promiseResult is PromiseFulfilledResult<T>;
 
 /**
-Narrows a variable of type PromiseResult to type PromiseRejectedResult if the variable has the property 'reason', otherwise narrows it to PromiseFulfilledResult type.
-@param promiseResult - a variable of type PromiseResult
-@returns boolean
+Narrows a variable of type `PromiseResult` to type `PromiseRejectedResult` if the variable has the property `reason`, otherwise narrows it to the `PromiseFulfilledResult` type.
 */
 export function isRejected<T>(promiseResult: PromiseResult<T>): promiseResult is PromiseRejectedResult;
