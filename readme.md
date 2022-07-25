@@ -15,7 +15,7 @@ $ npm install p-reflect
 Here, `Promise.all` would normally fail early because one of the promises rejects, but by using `p-reflect`, we can ignore the rejection and handle it later on.
 
 ```js
-import pReflect, {isFulfilled} from 'p-reflect';
+import pReflect from 'p-reflect';
 
 const promises = [
 	getPromise(),
@@ -50,7 +50,7 @@ console.log(results);
 */
 
 const resolvedString = results
-	.filter(isFulfilled)
+	.filter(result => result.isFulfilled)
 	.map(result => result.value)
 	.join('');
 
