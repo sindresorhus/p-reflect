@@ -15,7 +15,7 @@ $ npm install p-reflect
 Here, `Promise.all` would normally fail early because one of the promises rejects, but by using `p-reflect`, we can ignore the rejection and handle it later on.
 
 ```js
-import pReflect from 'p-reflect';
+import pReflect, {isFulfilled} from 'p-reflect';
 
 const promises = [
 	getPromise(),
@@ -50,7 +50,7 @@ console.log(results);
 */
 
 const resolvedString = results
-	.filter(result => result.isFulfilled)
+	.filter(isFulfilled)
 	.map(result => result.value)
 	.join('');
 
@@ -78,6 +78,25 @@ The object has the following properties:
 Type: `Promise`
 
 A promise to reflect upon.
+
+### isFulfilled(object)
+
+Returns a `Boolean`.
+
+Returns 'true' if the object has the property 'value'.
+
+This is useful since `await pReflect(promise)` always returns a `PromiseResult`. This function can be used to determine whether `PromiseResult` is `PromiseFulfilledResult` or `PromiseRejectedResult`
+
+- this is a workaround for [microsoft/TypeScript#32399](https://github.com/microsoft/TypeScript/issues/32399)
+- reference documentation [Using type predicates](https://www.typescriptlang.org/docs/handbook/2/narrowing.html)
+
+### isRejected(object)
+
+Returns a `Boolean`.
+
+Returns 'true' if the object has the property 'reason'.
+
+This is useful since `await pReflect(promise)` always returns a `PromiseResult`. This function can be used to determine whether `PromiseResult` is `PromiseRejectedResult` or `PromiseFulfilledResult`
 
 ## Related
 
