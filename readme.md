@@ -68,7 +68,7 @@ Returns a `Promise<Object>`.
 
 The object has the following properties:
 
-- `status` *('fulfilled' or 'rejected', Depending on whether the promise fulfilled or rejected)*
+- `status` *(`'fulfilled'` or `'rejected'`, depending on how the promise resolved)*
 - `value` or `reason` *(Depending on whether the promise fulfilled or rejected)*
 - `isFulfilled`
 - `isRejected`
