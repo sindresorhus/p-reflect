@@ -81,22 +81,22 @@ A promise to reflect upon.
 
 ### isFulfilled(object)
 
-Returns a `Boolean`.
+This is a type guard for TypeScript users.
 
-Returns 'true' if the object has the property 'value'.
+Returns `true` if the object has the property `value`, `false` otherwise.
 
-This is useful since `await pReflect(promise)` always returns a `PromiseResult`. This function can be used to determine whether `PromiseResult` is `PromiseFulfilledResult` or `PromiseRejectedResult`
+This is useful since `await pReflect(promise)` always returns a `PromiseResult`. This function can be used to determine whether `PromiseResult` is `PromiseFulfilledResult` or `PromiseRejectedResult`.
 
-- this is a workaround for [microsoft/TypeScript#32399](https://github.com/microsoft/TypeScript/issues/32399)
+This is a workaround for [microsoft/TypeScript#32399](https://github.com/microsoft/TypeScript/issues/32399)
 - reference documentation [Using type predicates](https://www.typescriptlang.org/docs/handbook/2/narrowing.html)
 
 ### isRejected(object)
 
-Returns a `Boolean`.
+This is a type guard for TypeScript users.
 
-Returns 'true' if the object has the property 'reason'.
+Returns `true` if the object has the property `reason`, `false` otherwise.
 
-This is useful since `await pReflect(promise)` always returns a `PromiseResult`. This function can be used to determine whether `PromiseResult` is `PromiseRejectedResult` or `PromiseFulfilledResult`
+This is useful since `await pReflect(promise)` always returns a `PromiseResult`. This function can be used to determine whether `PromiseResult` is `PromiseRejectedResult` or `PromiseFulfilledResult`.
 
 ## Related
 
