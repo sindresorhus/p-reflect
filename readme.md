@@ -6,8 +6,8 @@ Useful when you want a promise to fulfill no matter what and would rather handle
 
 ## Install
 
-```
-$ npm install p-reflect
+```sh
+npm install p-reflect
 ```
 
 ## Usage
